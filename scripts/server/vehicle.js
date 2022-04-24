@@ -170,9 +170,9 @@ function spawnAllVehicles() {
 // ===========================================================================
 
 /**
- * @param {Vehicle} vehicle - The vehicle element
- * @return {VehicleData} The vehicles's data (class instance)
- */
+	* @param {Vehicle} vehicle - The vehicle element
+	* @return {VehicleData} The vehicles's data (class instance)
+	*/
 function getVehicleData(vehicle) {
 	if(isVehicleObject(vehicle)) {
 		let dataIndex = getEntityData(vehicle, "vrr.dataSlot");
@@ -558,7 +558,7 @@ function buyVehicleCommand(command, params, client) {
 	getPlayerData(client).buyingVehicle = vehicle;
 	getVehicleData(vehicle).engine = true;
 	vehicle.engine = true;
-    setEntityData(vehicle, "vrr.engine", getVehicleData(vehicle).engine, true);
+	setEntityData(vehicle, "vrr.engine", getVehicleData(vehicle).engine, true);
 
 	getVehicleData(vehicle).needsSaved = true;
 	setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_TESTDRIVE, vehicle.id, getVehiclePosition(vehicle));
@@ -1079,10 +1079,10 @@ function reloadAllVehiclesCommand(command, params, client) {
 // ===========================================================================
 
 function respawnVehicleCommand(command, params, client) {
-    if(isPlayerInAnyVehicle(client)) {
-        removeAllOccupantsFromVehicle(getPlayerVehicle(client));
-        respawnVehicle(getPlayerVehicle(client));
-    }
+	if(isPlayerInAnyVehicle(client)) {
+		removeAllOccupantsFromVehicle(getPlayerVehicle(client));
+		respawnVehicle(getPlayerVehicle(client));
+	}
 
 	setAllVehicleIndexes();
 
@@ -1133,7 +1133,7 @@ function respawnJobVehiclesCommand(command, params, client) {
 		if(getServerData().vehicles[i].ownerType == VRR_VEHOWNER_JOB) {
 			respawnVehicle(getServerData().vehicles[i].vehicle);
 		}
-    }
+	}
 
 	messageAdminAction(`All job vehicles have been respawned by an admin!`);
 }
@@ -1145,7 +1145,7 @@ function respawnClanVehiclesCommand(command, params, client) {
 		if(getServerData().vehicles[i].ownerType == VRR_VEHOWNER_CLAN) {
 			respawnVehicle(getServerData().vehicles[i].vehicle);
 		}
-    }
+	}
 
 	messageAdminAction(`All clan vehicles have been respawned by an admin!`);
 }
@@ -1157,7 +1157,7 @@ function respawnPlayerVehiclesCommand(command, params, client) {
 		if(getServerData().vehicles[i].ownerType == VRR_VEHOWNER_PLAYER) {
 			respawnVehicle(getServerData().vehicles[i].vehicle);
 		}
-    }
+	}
 
 	messageAdminAction(`All player-owned vehicles have been respawned by an admin!`);
 }
@@ -1169,7 +1169,7 @@ function respawnPublicVehiclesCommand(command, params, client) {
 		if(getServerData().vehicles[i].ownerType == VRR_VEHOWNER_PUBLIC) {
 			respawnVehicle(getServerData().vehicles[i].vehicle);
 		}
-    }
+	}
 
 	messageAdminAction(`All public vehicles have been respawned by an admin!`);
 }
@@ -1181,7 +1181,7 @@ function respawnBusinessVehiclesCommand(command, params, client) {
 		if(getServerData().vehicles[i].ownerType == VRR_VEHOWNER_BIZ) {
 			respawnVehicle(getServerData().vehicles[i].vehicle);
 		}
-    }
+	}
 
 	messageAdminAction(`All business-owned vehicles have been respawned by an admin!`);
 }
@@ -1411,64 +1411,65 @@ function createPermanentVehicle(modelIndex, position, heading, interior = 0, dim
 // ===========================================================================
 
 function processVehiclePurchasing() {
-    if(!getGlobalConfig().useServerSideVehiclePurchaseCheck) {
-        return false;
-    }
+	if(!getGlobalConfig().useServerSideVehiclePurchaseCheck) {
+		return false;
+	}
 
-    getClients().forEach((client) => {
-        if(!isPlayerLoggedIn(client)) {
-            setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-            return false;
-        }
+	getClients().forEach((client) => {
+		if(!isPlayerLoggedIn(client)) {
+			setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+			return false;
+		}
 
-        if(!isPlayerSpawned(client)) {
-            setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-            return false;
-        }
+		if(!isPlayerSpawned(client)) {
+			setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+			return false;
+		}
 
-        if(!getPlayerData(client)) {
-            setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-            return false;
-        }
+		if(!getPlayerData(client)) {
+			setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+			return false;
+		}
 
-        if(!getPlayerData(client).buyingVehicle) {
-            setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-            return false;
-        }
+		if(!getPlayerData(client).buyingVehicle) {
+			setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+			return false;
+		}
 
-        if(!isPlayerInAnyVehicle(client)) {
-            if(getPlayerData(client).buyingVehicle != false) {
-                messagePlayerError(client, getLocaleString(client, "DealershipPurchaseExitedVehicle"));
-                respawnVehicle(getPlayerData(client).buyingVehicle);
-                getPlayerData(client).buyingVehicle = false;
-                setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-            }
-            return false;
-        }
+		if(!isPlayerInAnyVehicle(client)) {
+			if(getPlayerData(client).buyingVehicle != false) {
+				messagePlayerError(client, getLocaleString(client, "DealershipPurchaseExitedVehicle"));
+				respawnVehicle(getPlayerData(client).buyingVehicle);
+				getPlayerData(client).buyingVehicle = false;
+				setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+			}
+			return false;
+		}
 
-        if(getDistance(getVehiclePosition(getPlayerData(client).buyingVehicle), getVehicleData(getPlayerData(client).buyingVehicle).spawnPosition) > getGlobalConfig().buyVehicleDriveAwayDistance) {
-            if(getPlayerCurrentSubAccount(client).cash < getVehicleData(getPlayerData(client).buyingVehicle).buyPrice) {
-                messagePlayerError(client, getLocaleString(client, "VehiclePurchaseNotEnoughMoney"));
-                respawnVehicle(getPlayerData(client).buyingVehicle);
-                getPlayerData(client).buyingVehicle = false;
-                setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-                return false;
-            }
+		if(getDistance(getVehiclePosition(getPlayerData(client).buyingVehicle), getVehicleData(getPlayerData(client).buyingVehicle).spawnPosition) > getGlobalConfig().buyVehicleDriveAwayDistance) {
+			if(getPlayerCurrentSubAccount(client).cash < getVehicleData(getPlayerData(client).buyingVehicle).buyPrice) {
+				messagePlayerError(client, getLocaleString(client, "VehiclePurchaseNotEnoughMoney"));
+				respawnVehicle(getPlayerData(client).buyingVehicle);
+				getPlayerData(client).buyingVehicle = false;
+				setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+				return false;
+			}
 
-            createNewDealershipVehicle(getVehicleData(getPlayerData(client).buyingVehicle).model, getVehicleData(getPlayerData(client).buyingVehicle).spawnPosition, getVehicleData(getPlayerData(client).buyingVehicle).spawnRotation, getVehicleData(getPlayerData(client).buyingVehicle).buyPrice, getVehicleData(getPlayerData(client).buyingVehicle).ownerId);
-            takePlayerCash(client, getVehicleData(getPlayerData(client).buyingVehicle).buyPrice);
-            updatePlayerCash(client);
-            getVehicleData(getPlayerData(client).buyingVehicle).ownerId = getPlayerCurrentSubAccount(client).databaseId;
-            getVehicleData(getPlayerData(client).buyingVehicle).ownerType = VRR_VEHOWNER_PLAYER;
-            getVehicleData(getPlayerData(client).buyingVehicle).buyPrice = 0;
-            getVehicleData(getPlayerData(client).buyingVehicle).rentPrice = 0;
-            getVehicleData(getPlayerData(client).buyingVehicle).spawnLocked = false;
-            getPlayerData(client).buyingVehicle = false;
-            messagePlayerSuccess(client, getLocaleString(client, "VehiclePurchaseComplete"));
-            setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
-            return true;
-        }
-    });
+			createNewDealershipVehicle(getVehicleData(getPlayerData(client).buyingVehicle).model, getVehicleData(getPlayerData(client).buyingVehicle).spawnPosition, getVehicleData(getPlayerData(client).buyingVehicle).spawnRotation, getVehicleData(getPlayerData(client).buyingVehicle).buyPrice, getVehicleData(getPlayerData(client).buyingVehicle).ownerId);
+			takePlayerCash(client, getVehicleData(getPlayerData(client).buyingVehicle).buyPrice);
+			updatePlayerCash(client);
+			getVehicleData(getPlayerData(client).buyingVehicle).ownerId = getPlayerCurrentSubAccount(client).databaseId;
+			getVehicleData(getPlayerData(client).buyingVehicle).ownerType = VRR_VEHOWNER_PLAYER;
+			getVehicleData(getPlayerData(client).buyingVehicle).buyPrice = 0;
+			getVehicleData(getPlayerData(client).buyingVehicle).rentPrice = 0;
+			getVehicleData(getPlayerData(client).buyingVehicle).spawnLocked = false;
+			getVehicleData(getPlayerData(client).buyingVehicle).needsSaved = true;
+			getPlayerData(client).buyingVehicle = false;
+			messagePlayerSuccess(client, getLocaleString(client, "VehiclePurchaseComplete"));
+			setPlayerBuyingVehicleState(client, VRR_VEHBUYSTATE_NONE, null, null);
+			return true;
+		}
+	});
 
 	return false;
 }
@@ -1478,9 +1479,9 @@ function processVehiclePurchasing() {
 function processVehicleBurning() {
 	let vehicles = getElementsByType(ELEMENT_VEHICLE);
 	for(let i in vehicles) {
-        if(vehicles[i].health <= 250) {
-            return false;
-        }
+		if(vehicles[i].health <= 250) {
+			return false;
+		}
 	}
 }
 
@@ -1518,19 +1519,19 @@ function setAllVehicleIndexes() {
 // ===========================================================================
 
 function doesVehicleHaveMegaphone(vehicle) {
-    if(getVehicleData(vehicle).ownerType == VRR_VEHOWNER_JOB) {
-        if(getJobType(getJobIdFromDatabaseId(getVehicleData(vehicle).ownerId)) == VRR_JOB_POLICE) {
-            return true;
-        }
+	if(getVehicleData(vehicle).ownerType == VRR_VEHOWNER_JOB) {
+		if(getJobType(getJobIdFromDatabaseId(getVehicleData(vehicle).ownerId)) == VRR_JOB_POLICE) {
+			return true;
+		}
 
-        if(getJobType(getJobIdFromDatabaseId(getVehicleData(vehicle).ownerId)) == VRR_JOB_FIRE) {
-            return true;
-        }
+		if(getJobType(getJobIdFromDatabaseId(getVehicleData(vehicle).ownerId)) == VRR_JOB_FIRE) {
+			return true;
+		}
 
-        if(getJobType(getJobIdFromDatabaseId(getVehicleData(vehicle).ownerId)) == VRR_JOB_MEDICAL) {
-            return true;
-        }
-    }
+		if(getJobType(getJobIdFromDatabaseId(getVehicleData(vehicle).ownerId)) == VRR_JOB_MEDICAL) {
+			return true;
+		}
+	}
 
 	return false;
 }
@@ -1575,11 +1576,11 @@ function getVehicleTrunkPosition(vehicle) {
 // ===========================================================================
 
 function removeAllOccupantsFromVehicle(vehicle) {
-    for(let i = 0 ; i <= 16 ; i++) {
-        if(vehicle.getOccupant(i) != null) {
-            removePlayerFromVehicle(vehicle.getOccupant(i));
-        }
-    }
+	for(let i = 0 ; i <= 16 ; i++) {
+		if(vehicle.getOccupant(i) != null) {
+			removePlayerFromVehicle(vehicle.getOccupant(i));
+		}
+	}
 }
 
 // ===========================================================================

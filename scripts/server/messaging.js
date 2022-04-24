@@ -15,10 +15,10 @@ function initMessagingScript() {
 // ===========================================================================
 
 function messageAdminAction(messageText) {
-    messagePlayerNormal(null, `⚠️ ${messageText}`, getColourByName("orange"));
-    if(getServerConfig().discordEnabled) {
-        messageDiscord(`:warning: ${messageText}`);
-    }
+	messagePlayerNormal(null, `⚠️ ${messageText}`, getColourByName("orange"));
+	if(getServerConfig().discordEnabled) {
+		messageDiscord(`:warning: ${messageText}`);
+	}
 }
 
 // ===========================================================================
@@ -33,188 +33,188 @@ function messageAdminAction(messageText) {
  *
  */
 function messagePlayerNormal(client, messageText, colour = COLOUR_WHITE) {
-    //if(isConsole(client) || client == null) {
-    //    logToConsole(LOG_INFO, `${removeColoursInMessage(messageText)}`);
-    //}
+	//if(isConsole(client) || client == null) {
+	//    logToConsole(LOG_INFO, `${removeColoursInMessage(messageText)}`);
+	//}
 
-    sendChatBoxMessageToPlayer(client, messageText, colour);
-    return true;
+	sendChatBoxMessageToPlayer(client, messageText, colour);
+	return true;
 }
 
 // ===========================================================================
 
 function messageAdmins(messageText, colour = getColourByName("softRed")) {
-    //let plainMessage = removeColoursInMessage(messageText);
-    //console.warn(`🛡️ ${plainMessage}`);
+	//let plainMessage = removeColoursInMessage(messageText);
+	//console.warn(`🛡️ ${plainMessage}`);
 
-    let clients = getClients();
-    for(let i in clients) {
-        if(doesPlayerHaveStaffPermission(clients[i], getStaffFlagValue("BasicModeration"))) {
-            messagePlayerNormal(clients[i], `🛡️ ${messageText}`, colour);
-        }
-    }
+	let clients = getClients();
+	for(let i in clients) {
+		if(doesPlayerHaveStaffPermission(clients[i], getStaffFlagValue("BasicModeration"))) {
+			messagePlayerNormal(clients[i], `🛡️ ${messageText}`, colour);
+		}
+	}
 
-    //if(getServerConfig().discordConfig.sendAdminEvents) {
-    //    messageDiscordAdminChannel(plainMessage);
-    //}
+	//if(getServerConfig().discordConfig.sendAdminEvents) {
+	//    messageDiscordAdminChannel(plainMessage);
+	//}
 }
 
 // ===========================================================================
 
 function messagePlayerError(client, messageText) {
-    if(isConsole(client)) {
-        logToConsole(LOG_INFO, `❌ ${messageText}`);
-        return true;
-    }
+	if(isConsole(client)) {
+		logToConsole(LOG_INFO, `❌ ${messageText}`);
+		return true;
+	}
 
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `❌ ${messageText}`, getColourByName("white"));
-    } else {
-        messageDiscordUser(client, `❌ ${messageText}`);
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `❌ ${messageText}`, getColourByName("white"));
+	} else {
+		messageDiscordUser(client, `❌ ${messageText}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerSyntax(client, messageText) {
-    if(isConsole(client)) {
-        logToConsole(LOG_INFO, `⌨️ ${messageText}`);
-        return true;
-    }
+	if(isConsole(client)) {
+		logToConsole(LOG_INFO, `⌨️ ${messageText}`);
+		return true;
+	}
 
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `⌨️ USAGE: {MAINCOLOUR} ${messageText}`, getColourByType("syntaxMessage"));
-    } else {
-        messageDiscordUser(client, `⌨️ ${messageText}`);
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `⌨️ USAGE: {MAINCOLOUR} ${messageText}`, getColourByType("syntaxMessage"));
+	} else {
+		messageDiscordUser(client, `⌨️ ${messageText}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerAlert(client, messageText) {
-    if(isConsole(client)) {
-        logToConsole(LOG_INFO, `⚠️ ${messageText}`);
-        return true;
-    }
+	if(isConsole(client)) {
+		logToConsole(LOG_INFO, `⚠️ ${messageText}`);
+		return true;
+	}
 
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `⚠️ ${messageText}`, getColourByName("white"));
-    } else {
-        messageDiscordUser(client, `⚠️ ${messageText}`);
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `⚠️ ${messageText}`, getColourByName("white"));
+	} else {
+		messageDiscordUser(client, `⚠️ ${messageText}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerSuccess(client, messageText) {
-    if(isConsole(client)) {
-        logToConsole(LOG_INFO, `✔️ ${messageText}`);
-        return true;
-    }
+	if(isConsole(client)) {
+		logToConsole(LOG_INFO, `✔️ ${messageText}`);
+		return true;
+	}
 
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `✔️ ${messageText}`, getColourByName("white"));
-    } else {
-        messageDiscordUser(client, `✔️ ${messageText}`);
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `✔️ ${messageText}`, getColourByName("white"));
+	} else {
+		messageDiscordUser(client, `✔️ ${messageText}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerInfo(client, messageText) {
-    if(isConsole(client)) {
-        logToConsole(LOG_INFO, `ℹ️ ${messageText}`);
-        return true;
-    }
+	if(isConsole(client)) {
+		logToConsole(LOG_INFO, `ℹ️ ${messageText}`);
+		return true;
+	}
 
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `ℹ️ ${messageText}`, getColourByName("white"));
-    } else {
-        messageDiscordUser(client, `:information_source: ${messageText}`);
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `ℹ️ ${messageText}`, getColourByName("white"));
+	} else {
+		messageDiscordUser(client, `:information_source: ${messageText}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerTip(client, messageText) {
-    if(isConsole(client)) {
-        logToConsole(LOG_INFO, `ℹ️ ${messageText}`);
-        return true;
-    }
+	if(isConsole(client)) {
+		logToConsole(LOG_INFO, `ℹ️ ${messageText}`);
+		return true;
+	}
 
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `ℹ️ ${messageText}`, getColourByName("white"));
-    } else {
-        messageDiscordUser(client, `:information_source: ${messageText}`);
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `ℹ️ ${messageText}`, getColourByName("white"));
+	} else {
+		messageDiscordUser(client, `:information_source: ${messageText}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerTalk(client, talkingClient, messageText) {
-    messagePlayerNormal(client, `🗣️ ${getPlayerAccentInlineOutput(talkingClient)}${getClientSubAccountName(talkingClient)} says: ${messageText}`, getColourByType("talkMessage"));
+	messagePlayerNormal(client, `🗣️ ${getPlayerAccentInlineOutput(talkingClient)}${getClientSubAccountName(talkingClient)} says: ${messageText}`, getColourByType("talkMessage"));
 }
 
 // ===========================================================================
 
 function messagePlayerWhisper(client, whisperingClient, messageText) {
-    messagePlayerNormal(client, `🤫 ${getPlayerAccentInlineOutput(whisperingClient)}${getClientSubAccountName(whisperingClient)} whispers: ${messageText}`, getColourByType("whisperMessage"));
+	messagePlayerNormal(client, `🤫 ${getPlayerAccentInlineOutput(whisperingClient)}${getClientSubAccountName(whisperingClient)} whispers: ${messageText}`, getColourByType("whisperMessage"));
 }
 
 // ===========================================================================
 
 function messagePlayerMegaPhone(client, shoutingClient, messageText) {
-    messagePlayerNormal(client, `📢 ${getPlayerAccentInlineOutput(shoutingClient)}${getClientSubAccountName(shoutingClient)} (megaphone): ${messageText}!`, getColourByType("yellow"));
+	messagePlayerNormal(client, `📢 ${getPlayerAccentInlineOutput(shoutingClient)}${getClientSubAccountName(shoutingClient)} (megaphone): ${messageText}!`, getColourByType("yellow"));
 }
 
 // ===========================================================================
 
 function messagePlayerShout(client, shoutingClient, messageText) {
-    messagePlayerNormal(client, `🗣️ ${getPlayerAccentInlineOutput(shoutingClient)}${getClientSubAccountName(shoutingClient)} shouts: ${messageText}!`, getColourByType("shoutMessage"));
+	messagePlayerNormal(client, `🗣️ ${getPlayerAccentInlineOutput(shoutingClient)}${getClientSubAccountName(shoutingClient)} shouts: ${messageText}!`, getColourByType("shoutMessage"));
 }
 
 // ===========================================================================
 
 function messagePlayerDoAction(client, doingActionClient, messageText) {
-    if(!isClientFromDiscord(client)) {
-        messagePlayerNormal(client, `${messageText} * (${getClientSubAccountName(doingActionClient)})`, getColourByType("doActionMessage"));
-    }
+	if(!isClientFromDiscord(client)) {
+		messagePlayerNormal(client, `${messageText} * (${getClientSubAccountName(doingActionClient)})`, getColourByType("doActionMessage"));
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerMeAction(client, doingActionClient, messageText) {
-    messagePlayerNormal(client, `${getClientSubAccountName(doingActionClient)} ${messageText}`, getColourByType("meActionMessage"));
+	messagePlayerNormal(client, `${getClientSubAccountName(doingActionClient)} ${messageText}`, getColourByType("meActionMessage"));
 }
 
 // ===========================================================================
 
 function messagePlayerClanChat(client, clanChattingClient, messageText) {
-    messagePlayerNormal(client, `👥 ${getInlineChatColourByName("clanOrange")}${(getPlayerClanRankName(clanChattingClient) != false) ? getPlayerClanRankName(clanChattingClient) : "No Rank"} ${getCharacterFullName(clanChattingClient)} {MAINCOLOUR}says (clan): {ALTCOLOUR}${messageText}`, getColourByType("clanChatMessage"));
+	messagePlayerNormal(client, `👥 ${getInlineChatColourByName("clanOrange")}${(getPlayerClanRankName(clanChattingClient) != false) ? getPlayerClanRankName(clanChattingClient) : "No Rank"} ${getCharacterFullName(clanChattingClient)} {MAINCOLOUR}says (clan): {ALTCOLOUR}${messageText}`, getColourByType("clanChatMessage"));
 }
 
 // ===========================================================================
 
 function messagePlayerAdminChat(client, adminChattingClient, messageText) {
-    messagePlayerNormal(client, `🛡️ [ADMIN CHAT] {ALTCOLOUR}${getPlayerData(adminChattingClient).accountData.staffTitle} [#CCCCCC]${getPlayerData(adminChattingClient).accountData.name}: {MAINCOLOUR}${messageText}`, getColourByType("orange"));
+	messagePlayerNormal(client, `🛡️ [ADMIN CHAT] {ALTCOLOUR}${getPlayerData(adminChattingClient).accountData.staffTitle} [#CCCCCC]${getPlayerData(adminChattingClient).accountData.name}: {MAINCOLOUR}${messageText}`, getColourByType("orange"));
 }
 
 // ===========================================================================
 
 function messagePlayerNewbieTip(client, message) {
-    if(!hasBitFlag(getPlayerData(client).accountData.settings, getAccountSettingsFlagValue("NoActionTips"))) {
-        messagePlayerNormal(client, `💡 ${message}`);
-    }
+	if(!hasBitFlag(getPlayerData(client).accountData.settings, getAccountSettingsFlagValue("NoActionTips"))) {
+		messagePlayerNormal(client, `💡 ${message}`);
+	}
 }
 
 // ===========================================================================
 
 function messagePlayerTimedRandomTip(client, message) {
-    if(isPlayerLoggedIn(client) && isPlayerSpawned(client)) {
-        if(!hasBitFlag(getPlayerData(client).accountData.settings, getAccountSettingsFlagValue("NoRandomTips"))) {
-            messagePlayerNormal(client, `💡 ${message}`);
-        }
-    }
+	if(isPlayerLoggedIn(client) && isPlayerSpawned(client)) {
+		if(!hasBitFlag(getPlayerData(client).accountData.settings, getAccountSettingsFlagValue("NoRandomTips"))) {
+			messagePlayerNormal(client, `💡 ${message}`);
+		}
+	}
 }
 
 // ===========================================================================
@@ -237,7 +237,7 @@ function clearChatBox(client) {
 // ===========================================================================
 
 function messagePlayerHelpContent(client, messageString) {
-    messagePlayerNormal(client, `{clanOrange}• {MAINCOLOUR}${messageString}`);
+	messagePlayerNormal(client, `{clanOrange}• {MAINCOLOUR}${messageString}`);
 }
 
 // ===========================================================================
