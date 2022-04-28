@@ -811,6 +811,7 @@ function setVehiclePurchaseState(state, vehicleId, position) {
 // ===========================================================================
 
 function processVehicleFires() {
+	/*
 	let vehicles = getElementsByType(ELEMENT_VEHICLE);
 	for(let i in vehicles) {
 		if(vehicles[i].isSyncer) {
@@ -821,6 +822,7 @@ function processVehicleFires() {
 			}
 		}
 	}
+	*/
 }
 
 // ===========================================================================
