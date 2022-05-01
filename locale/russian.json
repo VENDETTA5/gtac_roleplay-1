@@ -64,7 +64,7 @@
     "InvalidGate": "Не удалось найти ворота!",
     "EntersProperty": "открывает дверь и входит в {1}",
     "ExitsProperty": "открывает дверь и покидает {1}",
-    "EnterExitPropertyDoorLocked": "пытаеться открыть двери {1} но у него не выходить потому-что двери закрыты",
+    "EnterExitPropertyDoorLocked": "пытаеться открыть двери {1} но у него не выходит потому-что двери закрыты",
     "PropertyNoInterior": "У {1} нет доступного интерьера, но вы все еще можете использовать комманды стоя на значке возле входа.",
     "NoBusinessWithItemType": "Нет бизнесов в которых этот предмет доступен",
     "HeaderKeyBinds": "Привязки",
@@ -389,6 +389,6 @@
     "CantUseCommandYet": "Подождите некоторое время перед тем как использовать комманду снова!",
     "NotATester": "Вы не тестировщик!",
     "AccessDenied": "Доступ запрещен",
-    "InvalidSkin": "That skin is invalid!",
-    "HeaderInteriorTypes": "Interiors"
+    "InvalidSkin": "Этот скин не правильный!",
+    "HeaderInteriorTypes": "Интерьеры"
 }
